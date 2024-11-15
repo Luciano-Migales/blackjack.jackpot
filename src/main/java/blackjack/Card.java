@@ -1,20 +1,47 @@
 package blackjack;
 
 public class Card {
-    private String rank;
-    private String suit;
+    private final String suit;
+    private final String rank;
 
-    public Card(String rank, String suit) {
-        this.rank = rank;
+    /**
+     * Constructor for Card
+     * @param suit The suit of the card
+     * @param rank The rank of the card
+     */
+    public Card(String suit, String rank) {
         this.suit = suit;
+        this.rank = rank;
     }
 
+    /**
+     * Get the suit of the card
+     * @return String representing the suit
+     */
+    public String getSuit() {
+        return suit;
+    }
+
+    /**
+     * Get the rank of the card
+     * @return String representing the rank
+     */
     public String getRank() {
         return rank;
     }
 
-    public String getSuit() {
-        return suit;
+    /**
+     * Get the value of the card for Blackjack
+     * @return int value of the card
+     */
+    public int getValue() {
+        switch (rank) {
+            case "Ace": return 11;
+            case "King":
+            case "Queen":
+            case "Jack": return 10;
+            default: return Integer.parseInt(rank);
+        }
     }
 
     @Override
