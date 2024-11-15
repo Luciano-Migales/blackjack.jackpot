@@ -5,27 +5,45 @@ import java.util.Collections;
 
 public class Deck {
     private ArrayList<Card> cards;
+    private static final String[] SUITS = {"Hearts", "Diamonds", "Clubs", "Spades"};
+    private static final String[] RANKS = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                                         "Jack", "Queen", "King"};
 
+    /**
+     * Constructor for Deck
+     */
     public Deck() {
+        initializeDeck();
+    }
+
+    /**
+     * Initialize the deck with all 52 cards
+     */
+    public void initializeDeck() {
         cards = new ArrayList<>();
-        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
-        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-        
-        for (String suit : suits) {
-            for (String rank : ranks) {
-                cards.add(new Card(rank, suit));
+        for (String suit : SUITS) {
+            for (String rank : RANKS) {
+                cards.add(new Card(suit, rank));
             }
         }
+        shuffleDeck();
+    }
 
+    /**
+     * Shuffle the deck
+     */
+    public void shuffleDeck() {
         Collections.shuffle(cards);
     }
 
+    /**
+     * Draw a card from the deck
+     * @return Card drawn from the top
+     */
     public Card drawCard() {
-        if (cards.size() > 0) {
-            return cards.remove(0);
-        } else {
-            System.out.println("No more cards in the deck.");
-            return null;
+        if (cards.isEmpty()) {
+            initializeDeck();
         }
+        return cards.remove(0);
     }
 }
